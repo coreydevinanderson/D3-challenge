@@ -1,5 +1,3 @@
-// @TODO: YOUR CODE HERE!
-
 // svg container
 var svgHeight = 500;
 var svgWidth = 1000;
@@ -16,11 +14,11 @@ var chartHeight = svgHeight - margin.top - margin.bottom;
 var chartWidth = svgWidth - margin.left - margin.right;
 
 
+// Add svg
 var svg = d3.select("#scatter")
             .append("svg")
             .attr("height", svgHeight)
             .attr("width", svgWidth);
-
 
 d3.csv("./assets/data/data.csv").then(function(Data) {
 
@@ -34,6 +32,7 @@ d3.csv("./assets/data/data.csv").then(function(Data) {
     // shift everything over by the margins
     var chartGroup = svg.append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    // identify min and max and adjust so that circles don't fall out of window
     var xMin = d3.min(income) - 1000;
     var yMin = d3.min(obesity) - 2;
     var yMax = d3.max(obesity) + 2;
@@ -52,17 +51,15 @@ d3.csv("./assets/data/data.csv").then(function(Data) {
     var yAxis = d3.axisLeft(yScale);
     var xAxis = d3.axisBottom(xScale);
 
-    console.log(chartHeight);
-
     chartGroup.append("g")
-    .attr("transform", `translate(0, ${chartHeight})`)
-    .call(xAxis);
+              .attr("transform", `translate(0, ${chartHeight})`)
+              .call(xAxis);
 
     chartGroup.append("g")
               .call(yAxis);
 
-   // Add circles
-   chartGroup.append("g")
+    // Add circles
+    chartGroup.append("g")
             .selectAll("dot")
             .data(Data)
             .enter()
@@ -73,18 +70,20 @@ d3.csv("./assets/data/data.csv").then(function(Data) {
             .style("fill", "#69b3a2")
             .attr("text", d => d.abbr)
 
+    // Add labels to circles
     var labels = chartGroup.selectAll(null)
                             .data(Data)
                             .enter()
                             .append("text");
 
     labels.attr("x", d => xScale(d.income - 250))
-        .attr("y", d => yScale(d.obesity - 0.1))
-        .text(d => d.abbr)
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "10px")
-        .attr("fill", "white");
+          .attr("y", d => yScale(d.obesity - 0.1))
+          .text(d => d.abbr)
+          .attr("font-family", "sans-serif")
+          .attr("font-size", "10px")
+          .attr("fill", "white");
 
+    // Add axis titles
     chartGroup.append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("y", 0 - margin.left + 5)
