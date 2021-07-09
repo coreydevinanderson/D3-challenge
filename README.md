@@ -11,8 +11,11 @@ The core files (including the .js and .csv files) are contained within the asset
 The html code (index.html). can be found in the root of the D3_data_journalism directory. 
 
 ./D3_data_journalism//assets/js/app.js
+
 ./D3_data_journalism/assets/js/data/data.csv
+
 ./D3_data_journalism/index.html
+
 
 
 
