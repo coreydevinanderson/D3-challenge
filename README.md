@@ -1,5 +1,6 @@
-# D3-challenge
 D3.js  plotting demonstration
+
+----
 
 This repository uses JavaScript and HTML to make a basic scatterplot via the D3.js library.
 
@@ -16,6 +17,9 @@ The html code (index.html). can be found in the root of the D3_data_journalism d
 
 ./D3_data_journalism/index.html
 
+----
+
+All code written by Corey D. Anderson
 
 
 
